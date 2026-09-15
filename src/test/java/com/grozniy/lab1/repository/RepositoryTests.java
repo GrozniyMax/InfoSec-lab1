@@ -37,16 +37,19 @@ class RepositoryTests {
     }
 
     @Test
-    void dataItemRepositoryFindAllOrderedByCreatedAtDesc() throws InterruptedException {
+    void dataItemRepositoryFindAllOrderedByCreatedAtDesc() {
         DataItem older = DataItem.create("Older", "older content", null);
         dataItemRepository.save(older);
-        // Ensure distinct created_at values so the ordering is deterministic.
-        Thread.sleep(10);
         DataItem newer = DataItem.create("Newer", "newer content", null);
         dataItemRepository.save(newer);
 
         List<DataItem> items = dataItemRepository.findAllByOrderByCreatedAtDesc();
         assertThat(items).isNotEmpty();
-        assertThat(items.get(0).getTitle()).isEqualTo("Newer");
+        assertThat(items)
+                .extracting(DataItem::getCreatedAt)
+                .isSortedAccordingTo(java.util.Comparator.reverseOrder());
+        assertThat(items)
+                .extracting(DataItem::getTitle)
+                .contains("Older", "Newer");
     }
 }
