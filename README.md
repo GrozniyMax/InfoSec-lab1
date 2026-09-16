@@ -103,6 +103,11 @@ register/login/data, проверка 401 без токена, отсутств�
 Примечание: в `spotbugs-exclude.xml` отфильтрованы два известных ложных срабатывания для
 Spring/DI-кода (`CT_CONSTRUCTOR_THROW`, `EI_EXPOSE_REP2`) — см. комментарии в файле.
 
+Примечание: в `dependency-check` отключён анализатор **Sonatype OSS Index**
+(`ossindexAnalyzerEnabled=false` в `pom.xml`), т.к. ему нужен API-ключ, а без него он
+возвращает 401 и валит сборку. SCA работает по базе **NVD**, которой достаточно для
+Java/Maven-зависимостей. При наличии ключа его можно включить и/или добавить `NVD_API_KEY`.
+
 ### Где брать отчёты для скриншотов
 
 В CI отчёты сохраняются как artifacts (`spotbugs-report`, `dependency-check-report`).

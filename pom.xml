@@ -112,6 +112,12 @@
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
                 <version>10.0.4</version>
+                <configuration>
+                    <!-- OSS Index requires API credentials; without them it returns 401 and
+                         fails the build. Disable it for CI (no key configured) and rely on
+                         the NVD database, which covers Maven Central dependencies. -->
+                    <ossindexAnalyzerEnabled>false</ossindexAnalyzerEnabled>
+                </configuration>
             </plugin>
         </plugins>
     </build>
