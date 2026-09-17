@@ -1,3 +1,19 @@
 spring:
   application:
     name: lab1
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/lab1}
+    username: ${DB_USERNAME:lab1}
+    password: ${DB_PASSWORD:lab1}
+
+  flyway:
+    enabled: true
+
+server:
+  port: 8080
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:change-me-this-is-a-development-only-secret-key-0123456789}
+    expiration-ms: 3600000
