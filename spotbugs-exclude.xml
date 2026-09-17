@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SpotBugs exclusion filter.
+
+  The excluded patterns are known benign false positives in idiomatic
+  Spring Boot / dependency-injection code:
+
+  - CT_CONSTRUCTOR_THROW: a DI service constructor may throw (e.g. when
+    building the signing key). Spring owns these singletons; there is no
+    finalizer-attack surface worth gating the build on.
+  - EI_EXPOSE_REP2: storing a reference to a configuration object
+    (e.g. JwtConfig) that is only read after startup. These are effectively
+    immutable in practice and not attacker-controlled.
+
+  Other bug patterns remain active and will fail the build.
+-->
+<FindBugsFilter>
+    <Match>
+        <Bug pattern="CT_CONSTRUCTOR_THROW"/>
+    </Match>
+    <Match>
+        <Bug pattern="EI_EXPOSE_REP2"/>
+    </Match>
+</FindBugsFilter>
