@@ -12,22 +12,20 @@ public class DataItem {
     private Long id;
     private String title;
     private String content;
-    private Long ownerId;
     private Instant createdAt;
 
     public DataItem() {
     }
 
-    private DataItem(Long id, String title, String content, Long ownerId, Instant createdAt) {
+    private DataItem(Long id, String title, String content, Instant createdAt) {
         this.id = id;
         this.title = title;
         this.content = content;
-        this.ownerId = ownerId;
         this.createdAt = createdAt;
     }
 
-    public static DataItem create(String title, String content, Long ownerId) {
-        return new DataItem(null, title, content, ownerId, Instant.now());
+    public static DataItem create(String title, String content) {
+        return new DataItem(null, title, content, Instant.now());
     }
 
     public Long getId() {
@@ -54,14 +52,6 @@ public class DataItem {
         this.content = content;
     }
 
-    public Long getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(Long ownerId) {
-        this.ownerId = ownerId;
-    }
-
     public Instant getCreatedAt() {
         return createdAt;
     }
@@ -70,13 +60,4 @@ public class DataItem {
         this.createdAt = createdAt;
     }
 
-    @Override
-    public String toString() {
-        return "DataItem{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", ownerId=" + ownerId +
-                ", createdAt=" + createdAt +
-                '}';
-    }
 }
