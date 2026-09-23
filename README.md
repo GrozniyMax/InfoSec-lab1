@@ -93,7 +93,6 @@ register/login/data, проверка 401 без токена, отсутств�
 ### Запуск сканеров локально
 
 ```bash
-# SAST: SpotBugs (не должен найти ошибок)
 ./mvnw -B compile com.github.spotbugs:spotbugs-maven-plugin:check
 
 # SCA: OWASP Dependency-Check (генерирует target/dependency-check-report.html)
